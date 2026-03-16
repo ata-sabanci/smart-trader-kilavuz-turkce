@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Trader — SNIF-OFF 5.1 · Kapsamlı Kılavuz</title>
+<meta name="description" content="Smart Trader SNIF-OFF 5.1 Trade Finder indikatörünün eksiksiz eğitim el kitabı — Ata Sabancı tarafından. Tüm özellikler, tüm alarmlar, tüm ayarlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-deep:#0a0b0f;--bg-card:#12141c;--bg-card-hover:#181b26;--bg-surface:#1a1d28;
+  --border:#1f2233;--border-accent:#2a2d44;
+  --text-primary:#e8e9ed;--text-secondary:#8b8fa3;--text-muted:#565a6e;
+  --green:#06d6a0;--red:#ef476f;--gold:#ffd166;--cyan:#00d4ff;--purple:#a78bfa;
+  --green-dim:rgba(6,214,160,.12);--red-dim:rgba(239,71,111,.12);
+  --gold-dim:rgba(255,209,102,.12);--cyan-dim:rgba(0,212,255,.12);--purple-dim:rgba(167,139,250,.12);
+  --sidebar-w:280px;--header-h:60px;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--cyan);color:var(--bg-deep)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+.site-header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:rgba(10,11,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100;display:flex;align-items:center;padding:0 24px}
+.header-brand{display:flex;align-items:center;gap:12px}
+.header-brand .logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--green));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--bg-deep);font-family:var(--font-mono)}
+.header-brand h1{font-family:var(--font-body);font-size:15px;font-weight:600;letter-spacing:.02em}
+.header-brand h1 span{color:var(--text-muted);font-weight:400;margin-left:6px;font-size:13px}
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
+.btn-tv{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--green));color:var(--bg-deep);font-weight:600;font-size:13px;text-decoration:none;transition:all .25s var(--ease);border:none;cursor:pointer}
+.btn-tv:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,212,255,.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:transparent;color:var(--text-secondary);font-weight:500;font-size:13px;text-decoration:none;border:1px solid var(--border);transition:all .25s var(--ease)}
+.btn-outline:hover{border-color:var(--text-muted);color:var(--text-primary)}
+.hamburger{display:none;background:none;border:none;color:var(--text-primary);cursor:pointer;padding:8px}
+.hamburger svg{width:24px;height:24px}
+.sidebar{position:fixed;top:var(--header-h);left:0;width:var(--sidebar-w);height:calc(100vh - var(--header-h));background:var(--bg-card);border-right:1px solid var(--border);overflow-y:auto;z-index:90;padding:20px 0;transition:transform .3s var(--ease)}
+.sidebar-search{padding:0 16px 16px;position:sticky;top:0;background:var(--bg-card);z-index:2}
+.sidebar-search input{width:100%;padding:10px 14px 10px 38px;border-radius:8px;border:1px solid var(--border);background:var(--bg-surface);color:var(--text-primary);font-size:13px;font-family:var(--font-body);outline:none;transition:border-color .2s}
+.sidebar-search input:focus{border-color:var(--cyan)}
+.sidebar-search .search-icon{position:absolute;left:28px;top:12px;color:var(--text-muted);pointer-events:none}
+.sidebar-search .search-icon svg{width:16px;height:16px}
+.nav-group{margin-bottom:8px}
+.nav-group-title{padding:8px 20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted)}
+.nav-link{display:flex;align-items:center;gap:10px;padding:9px 20px;font-size:13.5px;color:var(--text-secondary);text-decoration:none;transition:all .15s;border-left:2px solid transparent;cursor:pointer}
+.nav-link:hover{color:var(--text-primary);background:rgba(255,255,255,.03)}
+.nav-link.active{color:var(--cyan);border-left-color:var(--cyan);background:rgba(0,212,255,.05)}
+.nav-link .nav-emoji{font-size:15px;flex-shrink:0;width:22px;text-align:center}
+.main{margin-left:var(--sidebar-w);margin-top:var(--header-h);min-height:calc(100vh - var(--header-h))}
+.content{max-width:860px;margin:0 auto;padding:48px 40px 120px}
+.section{margin-bottom:72px;animation:fadeUp .5s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.section-label{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:var(--font-display);font-size:clamp(28px,4vw,38px);font-weight:800;line-height:1.2;margin-bottom:16px;color:var(--text-primary)}
+.section-subtitle{font-size:17px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px;max-width:640px}
+.section p{margin-bottom:16px;color:var(--text-secondary);font-size:15px;line-height:1.8}
+.section p strong{color:var(--text-primary);font-weight:600}
+.hero{padding:80px 40px 64px;text-align:center;position:relative;overflow:hidden;max-width:860px;margin:0 auto}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.06) 0%,transparent 70%);pointer-events:none}
+.hero .section-label{font-size:13px;letter-spacing:.15em}
+.hero .section-title{font-size:clamp(34px,5vw,52px);margin-bottom:20px;background:linear-gradient(135deg,var(--text-primary) 40%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .section-subtitle{margin:0 auto 36px;max-width:560px;font-size:18px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:var(--bg-card);border:1px solid var(--border);font-size:12px;color:var(--text-muted);margin-top:28px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:32px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all .25s var(--ease)}
+.card:hover{border-color:var(--border-accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.card p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin:0}
+.accordion{margin-bottom:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg-card)}
+.accordion-trigger{width:100%;padding:18px 20px;display:flex;align-items:center;gap:12px;background:none;border:none;color:var(--text-primary);font-family:var(--font-body);font-size:14.5px;font-weight:500;text-align:left;cursor:pointer;transition:background .15s}
+.accordion-trigger:hover{background:rgba(255,255,255,.02)}
+.accordion-trigger .acc-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.accordion-trigger .acc-arrow{margin-left:auto;color:var(--text-muted);transition:transform .25s var(--ease);font-size:12px}
+.accordion-trigger[aria-expanded="true"] .acc-arrow{transform:rotate(180deg)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.accordion-body.open{max-height:3000px}
+.accordion-content{padding:0 20px 20px;font-size:14px;color:var(--text-secondary);line-height:1.8}
+.accordion-content p{margin-bottom:12px}
+.accordion-content strong{color:var(--text-primary)}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;font-family:var(--font-mono);white-space:nowrap}
+.tag-green{background:var(--green-dim);color:var(--green)}
+.tag-red{background:var(--red-dim);color:var(--red)}
+.tag-gold{background:var(--gold-dim);color:var(--gold)}
+.tag-cyan{background:var(--cyan-dim);color:var(--cyan)}
+.tag-purple{background:var(--purple-dim);color:var(--purple)}
+.tag-grey{background:rgba(86,90,110,.15);color:var(--text-muted)}
+.signal-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:10px;transition:border-color .2s}
+.signal-card:hover{border-color:var(--border-accent)}
+.signal-card .signal-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.signal-card .signal-name{font-weight:600;font-size:14px}
+.signal-card .signal-desc{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.signal-card .signal-example{margin-top:10px;padding:12px 16px;border-radius:8px;background:var(--bg-surface);font-size:13px;color:var(--text-muted);line-height:1.6;border-left:3px solid var(--border-accent)}
+.signal-card .signal-example strong{color:var(--text-secondary)}
+.alert-table{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 32px;font-size:13px}
+.alert-table th{padding:10px 14px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);background:var(--bg-surface);border-bottom:1px solid var(--border)}
+.alert-table th:first-child{border-radius:8px 0 0 0}
+.alert-table th:last-child{border-radius:0 8px 0 0}
+.alert-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top}
+.alert-table tr:hover td{background:rgba(255,255,255,.015)}
+.alert-table code{font-family:var(--font-mono);font-size:12px;color:var(--cyan);background:var(--cyan-dim);padding:2px 6px;border-radius:4px}
+.scenario-grid{display:grid;gap:10px;margin:20px 0}
+.scenario-item{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;transition:border-color .2s}
+.scenario-item:hover{border-color:var(--border-accent)}
+.scenario-id{font-family:var(--font-mono);font-size:20px;display:flex;align-items:flex-start;justify-content:center;padding-top:2px}
+.scenario-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.scenario-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin:0}
+.scenario-body .scenario-example{margin-top:8px;padding:10px 14px;border-radius:6px;background:var(--bg-surface);font-size:12.5px;color:var(--text-muted);line-height:1.5}
+.color-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:20px 0}
+.color-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border)}
+.color-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+.color-item span{font-size:13px}
+.callout{padding:16px 20px;border-radius:10px;margin:20px 0;font-size:14px;line-height:1.7}
+.callout-info{background:var(--cyan-dim);border:1px solid rgba(0,212,255,.2);color:var(--cyan)}
+.callout-warn{background:var(--gold-dim);border:1px solid rgba(255,209,102,.2);color:var(--gold)}
+.callout-tip{background:var(--green-dim);border:1px solid rgba(6,214,160,.2);color:var(--green)}
+.callout strong{color:inherit}
+.steps{counter-reset:step;margin:20px 0}
+.step{counter-increment:step;display:flex;gap:16px;padding:16px 0;position:relative}
+.step::before{content:counter(step);width:32px;height:32px;border-radius:50%;background:var(--bg-surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--cyan);flex-shrink:0}
+.step:not(:last-child)::after{content:'';position:absolute;left:15px;top:52px;bottom:0;width:1px;background:var(--border)}
+.step-content h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.step-content p{font-size:13.5px;color:var(--text-secondary);margin:0}
+.setting-item{padding:14px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
+.setting-item h4{font-size:13.5px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.setting-item h4 .setting-default{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);font-weight:400}
+.setting-item p{font-size:13px;color:var(--text-secondary);margin:0;line-height:1.6}
+.site-footer{border-top:1px solid var(--border);padding:40px;text-align:center;color:var(--text-muted);font-size:13px;line-height:1.8}
+.site-footer a{color:var(--cyan);text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.divider{height:1px;background:var(--border);margin:48px 0}
+.section.hidden{display:none}
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:85}
+  .sidebar-overlay.show{display:block}
+  .main{margin-left:0}
+  .content{padding:32px 20px 100px}
+  .hamburger{display:block}
+  .hero{padding:48px 20px 40px}
+  .header-actions .btn-outline{display:none}
+}
+@media(max-width:600px){
+  .card-grid{grid-template-columns:1fr}
+  .color-legend{grid-template-columns:1fr}
+  .alert-table{font-size:12px}
+  .alert-table th,.alert-table td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menü">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="header-brand">
+    <div class="logo-mark">ST</div>
+    <h1>SNIF-OFF 5.1<span>Kapsamlı Kılavuz</span></h1>
+  </div>
+  <div class="header-actions">
+    <a href="https://www.tradingview.com/u/ata_sabanci/#published-scripts" target="_blank" rel="noopener" class="btn-outline">TradingView Profili</a>
+    <a href="https://www.tradingview.com/script/EDyXsADY-Smart-Trader-SNIF-OFF-5-1-Trade-Finder-By-Ata-Sabanci/" target="_blank" rel="noopener" class="btn-tv">İndikatörü Edin →</a>
+  </div>
+</header>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-search">
+    <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    <input type="text" id="searchInput" placeholder="Terim veya özellik ara..." oninput="filterSections(this.value)">
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-title">Başlangıç</div>
+    <a class="nav-link" href="#hosgeldiniz"><span class="nav-emoji">🏠</span>Hoş Geldiniz</a>
+    <a class="nav-link" href="#hizlibaslangic"><span class="nav-emoji">🚀</span>Hızlı Başlangıç</a>
+    <a class="nav-link" href="#panel"><span class="nav-emoji">📊</span>Dashboard Paneli</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-title">Ana Modüller</div>
+    <a class="nav-link" href="#trend"><span class="nav-emoji">📈</span>Trend Motoru</a>
+    <a class="nav-link" href="#verimlilik"><span class="nav-emoji">⚡</span>Mum Verimliliği</a>
+    <a class="nav-link" href="#hacim"><span class="nav-emoji">📦</span>Hacim İstihbaratı</a>
+    <a class="nav-link" href="#footprint"><span class="nav-emoji">🔬</span>Hacim Footprint</a>
+    <a class="nav-link" href="#gruplama"><span class="nav-emoji">📐</span>Gruplama & Liderler</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-title">Referans</div>
+    <a class="nav-link" href="#alarmlar"><span class="nav-emoji">🔔</span>Tüm Alarmlar (54)</a>
+    <a class="nav-link" href="#ayarlar"><span class="nav-emoji">⚙️</span>Ayarlar Referansı</a>
+    <a class="nav-link" href="#sozluk"><span class="nav-emoji">📖</span>Sözlük</a>
+    <a class="nav-link" href="#sss"><span class="nav-emoji">❓</span>SSS</a>
+    <a class="nav-link" href="#hakkinda"><span class="nav-emoji">👤</span>Hakkında</a>
+  </div>
+</nav>
+
+<!-- ═══ ANA İÇERİK ═══ -->
+<main class="main">
+<div class="content">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero" id="hosgeldiniz">
+  <div class="section-label">Smart Trader — SNIF-OFF 5.1 · Trade Finder</div>
+  <h1 class="section-title">Kapsamlı Eğitim Kılavuzu</h1>
+  <p class="section-subtitle">İndikatörü anlamak ve ustalaşmak için ihtiyacınız olan her şey — her özellik, her terim, her alarm. Sıfır belirsizlik.</p>
+  <div class="hero-actions">
+    <a href="https://www.tradingview.com/script/EDyXsADY-Smart-Trader-SNIF-OFF-5-1-Trade-Finder-By-Ata-Sabanci/" target="_blank" rel="noopener" class="btn-tv">TradingView'da İndikatörü Edin →</a>
+    <a href="#hizlibaslangic" class="btn-outline">Öğrenmeye Başla ↓</a>
+  </div>
+  <div class="hero-badge"><span class="dot"></span> Ata Sabancı · Sadece Davetli İndikatör</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: HIZLI BAŞLANGIÇ ═══ -->
+<section class="section" id="hizlibaslangic" data-search="hızlı başlangıç kurulum ekleme grafik plan abonelik tier">
+  <div class="section-label">Bölüm 0</div>
+  <h2 class="section-title">Hızlı Başlangıç</h2>
+  <p class="section-subtitle">İndikatörü 2 dakikadan kısa sürede grafiğinizde çalıştırın.</p>
+
+  <div class="steps">
+    <div class="step"><div class="step-content"><h4>Erişim Alın</h4><p>Bu <strong>sadece davetli</strong> bir indikatördür. Erişim talep etmek için Ata Sabancı'ya <a href="https://www.tradingview.com/u/ata_sabanci/" target="_blank" rel="noopener" style="color:var(--cyan)">TradingView profili</a> üzerinden ulaşın.</p></div></div>
+    <div class="step"><div class="step-content"><h4>Grafiğinize Ekleyin</h4><p>Erişim aldıktan sonra TradingView'ın indikatör aramasında <strong>"Smart Trader, SNIF-OFF 5.1, Trade Finder"</strong> yazın veya <a href="https://www.tradingview.com/script/EDyXsADY-Smart-Trader-SNIF-OFF-5-1-Trade-Finder-By-Ata-Sabanci/" target="_blank" rel="noopener" style="color:var(--cyan)">indikatör sayfasını</a> açıp "Grafiğe Ekle" butonuna tıklayın.</p></div></div>
+    <div class="step"><div class="step-content"><h4>TradingView Planınızı Seçin</h4><p>İndikatör ayarlarından, TradingView hesabınızla eşleşen <strong>Abonelik Planı</strong>'nı seçin. Bu, plan seviyenize uygun özellikleri açar.</p></div></div>
+    <div class="step"><div class="step-content"><h4>Dilinizi Seçin</h4><p>Dashboard <strong>English</strong>, <strong>Türkçe</strong> ve <strong>العربية</strong> dillerini destekler. Dashboard ayarlar grubundan tercihinizi seçin.</p></div></div>
+    <div class="step"><div class="step-content"><h4>Dashboard'u Okuyun</h4><p><strong>Yukarıdan aşağıya</strong> okuyun: Önce trend yönü, sonra hareket kalitesi (verimlilik), sonra hacim analizi. Her satır bir üstündeki satırın üzerine inşa edilir.</p></div></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:32px 0 16px">Abonelik Seviyeleri</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon" style="background:var(--green-dim)">🆓</div><h3>Basic (Ücretsiz)</h3><p>Trend Motoru, Mum Verimliliği, Geometri tabanlı Hacim, Dashboard, Gruplama Kutuları, Lider Mumlar, Trend Çizgileri, tüm Alarmlar.</p></div>
+    <div class="card"><div class="card-icon" style="background:var(--gold-dim)">⭐</div><h3>Essential & Plus</h3><p>Basic'teki her şey <strong>artı</strong> Intrabar Hacim yöntemi — alt zaman dilimi verilerini kullanarak daha yüksek hassasiyetli hacim ayrıştırma.</p></div>
+    <div class="card"><div class="card-icon" style="background:var(--cyan-dim)">💎</div><h3>Premium & Ultimate</h3><p>Essential'daki her şey <strong>artı</strong> Native Footprint — her fiyat seviyesinde gerçek tick düzeyinde alış/satış verisi. Maksimum doğruluk.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: DASHBOARD ═══ -->
+<section class="section" id="panel" data-search="dashboard panel renk yeşil kırmızı altın mavi gri pozisyon yazı tipi mobil masaüstü dil">
+  <div class="section-label">Bölüm 1</div>
+  <h2 class="section-title">Dashboard Paneli</h2>
+  <p class="section-subtitle">Kontrol paneliniz — tüm piyasa istihbaratı tek bir yerde.</p>
+
+  <p>Dashboard, grafiğinizde görünen çok satırlı bir paneldir. İndikatörün tüm analizlerini yukarıdan aşağıya okuyabileceğiniz tek bir görünümde birleştirir. Bunu her kapanan mumda güncellenen piyasa durum raporunuz olarak düşünün.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Renk Kodlama Sistemi</h3>
+  <p>Dashboard'daki renkler <strong>rastgele değildir</strong>. Her rengin tüm indikatör boyunca tutarlı bir anlamı vardır:</p>
+
+  <div class="color-legend">
+    <div class="color-item"><div class="color-dot" style="background:#06d6a0"></div><span><strong style="color:var(--green)">Yeşil</strong> — Yükseliş / Pozitif / Destekleyici</span></div>
+    <div class="color-item"><div class="color-dot" style="background:#ef476f"></div><span><strong style="color:var(--red)">Kırmızı</strong> — Düşüş / Uyarı / Karşıt</span></div>
+    <div class="color-item"><div class="color-dot" style="background:#ffd166"></div><span><strong style="color:var(--gold)">Altın</strong> — Dikkat / Karışık / Geçiş</span></div>
+    <div class="color-item"><div class="color-dot" style="background:#00d4ff"></div><span><strong style="color:var(--cyan)">Mavi</strong> — Aşırı / Şok / Olağanüstü</span></div>
+    <div class="color-item"><div class="color-dot" style="background:#a78bfa"></div><span><strong style="color:var(--purple)">Mor</strong> — Dönüş / Kaskad onaylı</span></div>
+    <div class="color-item"><div class="color-dot" style="background:#555555"></div><span><strong style="color:var(--text-muted)">Gri</strong> — Veri yok / Yetersiz / Nötr</span></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Masaüstü vs Mobil</h3>
+  <p><strong>Masaüstü Dashboard</strong> tüm aktif modülleri tam detaylı gösterir. <strong>Mobil Dashboard</strong> sadece en kritik verileri gösteren ince 5 satırlık bir versiyondur — trend yönü, hareket kalitesi ve hacim baskısı. Telefonda işlem yaparken ayarlardan mobil modu açın.</p>
+
+  <div class="callout callout-tip"><strong>İpucu:</strong> Dashboard'u yukarıdan aşağıya okuyun. Trend yönü, piyasanın NEREYE gittiğini söyler. Verimlilik, NE KADAR İYİ gittiğini söyler. Hacim, KİMİN ittiğini söyler.</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: TREND MOTORU ═══ -->
+<section class="section" id="trend" data-search="trend motoru yön hizalama dönüş kaskad sapma makro bias yükseliş düşüş kanaat sinyal boğa ayı anlatı">
+  <div class="section-label">Bölüm 2</div>
+  <h2 class="section-title">Trend Motoru</h2>
+  <p class="section-subtitle">Çoklu ölçek yön analizi — trendi kalabalıktan önce bilin.</p>
+
+  <p>Trend Motoru, fiyat yönünü <strong>aynı anda 6 farklı zaman ufkunda</strong> analiz eder — 3 mumdan (en hızlı) 49 muma (en yavaş) kadar. Sonra hepsini tek, eyleme geçirilebilir bir sinyalde birleştirir. Bunu aynı grafiğe farklı yakınlık seviyelerinde bakan 6 farklı analist gibi düşünün — motor hemfikir olup olmadıklarını raporlar.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Hizalama Skoru</h3>
+  <p>6 ölçeğin her biri oy verir: <strong>+1</strong> (yükseliş), <strong>−1</strong> (düşüş) veya <strong>0</strong> (düz). Hepsini toplayınca <strong>−6</strong> (hepsi düşüş) ile <strong>+6</strong> (hepsi yükseliş) arasında değişen Hizalama Skoru'nu elde edersiniz.</p>
+  <div class="callout callout-info"><strong>Örnek:</strong> 6 ölçeğin 5'i "yukarı" ve 1'i "aşağı" diyorsa, hizalama = +4. Bu, neredeyse tam uzlaşıyla sağlam bir yükseliş trendidir.</div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">11 Trend Durumu</h3>
+  <p>Motor, öncelik sırasına göre 11 durumdan birine çözümlenir (yüksek öncelikli sinyaller düşük olanları geçersiz kılar):</p>
+
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-purple">⚡ Yükseliş Dönüşü Onaylandı ▲</span></div>
+    <div class="signal-desc">Kısa vadeli VE orta vadeli ölçekler, geniş yapı hâlâ düşüş yönlüyken ikisi birden yükselişe döndü. İki bağımsız katman dönüşü onaylıyor — en güçlü yükseliş dönüş sinyali.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Fiyat günlerdir düşüyor. Ama şimdi 3, 7, 13 ve 19 mumluk ölçeklerin hepsi yukarıyı gösteriyor — sadece 29 ve 49 mumluk hâlâ aşağıda. Dönüş içten dışa doğru onaylandı.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-purple">⚡ Düşüş Dönüşü Onaylandı ▼</span></div>
+    <div class="signal-desc">Yukarının aynası — kısa ve orta vadeli ölçekler, geniş yapı hâlâ yükselişken düşüşe döndü. İki katman aşağı yönlü dönüşü onaylıyor.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Güçlü bir yükseliş trendi aktif, ama şimdi 6 ölçeğin 4'ü düşüşe döndü. Trend içten çatırdıyor.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-gold">▲ Yükseliş Dönüşü Oluşuyor</span></div>
+    <div class="signal-desc">Sadece en hızlı ölçekler (3 ve 7 mumluk) yükselişe döndü, en yavaşlar (29 ve 49 mumluk) hâlâ aşağı gösteriyor. Bu bir <strong>erken uyarı</strong> — dönüş inşa ediliyor ama henüz orta vade tarafından onaylanmadı.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Bir düşüş trendinin ardından, çok kısa vadeli momentum yukarı döndü ama büyük resim henüz yetişmedi. Orta vadenin takip etmesini izleyin.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-gold">▼ Düşüş Dönüşü Oluşuyor</span></div>
+    <div class="signal-desc">En hızlı ölçekler düşüşe döndü, en yavaşlar hâlâ yukarıda. Erken düşüş uyarısı.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-green">▲▲ Güçlü Yükseliş Trendi</span></div>
+    <div class="signal-desc">6 ölçeğin 5 veya 6'sı yükseliş yönünde hemfikir (hizalama ≥ +5). Neredeyse tam uzlaşı — trend yerleşmiş ve net.</div>
+    <div class="signal-example"><strong>Örnek:</strong> 3 mumdan 49 muma kadar her zaman ufku "yukarı" diyor. Bundan daha net olamaz.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-red">▼▼ Güçlü Düşüş Trendi</span></div>
+    <div class="signal-desc">6 ölçeğin 5 veya 6'sı düşüş yönünde hemfikir (hizalama ≤ −5). Neredeyse tam düşüş uzlaşısı.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-green">▲ Gizli Yükseliş Eğilimi</span></div>
+    <div class="signal-desc">Kısa vade karmaşık ve belirsiz, ama en büyük iki ölçek (29 ve 49 mumluk) ikisi de yukarı gösteriyor. Kısa vadeli gürültünün gizlediği yapısal bir yükseliş eğilimi var.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Piyasa küçük zaman dilimlerinde dalgalı görünüyor, ama uzaklaşıp bakın — büyük resim sessizce yükseliş yönlü. Kısa vadeli gürültü gerçek yönü maskeleliyor.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-red">▼ Gizli Düşüş Eğilimi</span></div>
+    <div class="signal-desc">Kısa vade gürültülü, ama yapısal ölçekler ikisi de aşağı gösteriyor. Yüzey karmaşasına rağmen altta yatan yön düşüş.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-green">▲ Yükseliş Trendi Aktif</span></div>
+    <div class="signal-desc">3 veya 4 ölçek yükseliş yönünde hemfikir (hizalama +3 ile +4). Çoğunluk "yukarı" diyor — trend aktif ama henüz tam uzlaşıda değil.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-red">▼ Düşüş Trendi Aktif</span></div>
+    <div class="signal-desc">3 veya 4 ölçek düşüş yönünde hemfikir (hizalama −3 ile −4). Çoğunluk düşüş yönlü.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-grey">◆ Net Trend Yok</span></div>
+    <div class="signal-desc">3'ten az ölçek herhangi bir yönde hemfikir. Piyasa kararsız — farklı zaman ufukları birbirini çeliyor. Şu anda güvenilir bir yönsel avantaj yok.</div>
+    <div class="signal-example"><strong>Örnek:</strong> 3 mumluk yukarı diyor, 7 mumluk aşağı, 13 mumluk yukarı, 29 mumluk aşağı. Tam bir uyumsuzluk — temkinli olun veya bekleyin.</div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Kanaat (Conviction)</h3>
+  <p>Tek başına yön yetmez — arkasındaki hareketlerin <strong>ne kadar güçlü</strong> olduğunu bilmeniz gerekir. Kanaat, sadece yönlerini değil, tüm ölçeklerdeki hareketlerin gücünü ölçer.</p>
+  <div style="display:grid;gap:8px;margin:16px 0">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-green">HIGH (Yüksek)</span></div><div class="signal-desc">Birden fazla zaman ufkunda güçlü hareketler. Yönün arkasında ciddi güç var. Sinyali ciddiye alın.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">MODERATE (Orta)</span></div><div class="signal-desc">Normal hareket gücü. Yön var ama enerji ortalama düzeyde.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-grey">LOW (Düşük)</span></div><div class="signal-desc">Olası bir yönsel sinyale rağmen zayıf momentum. Hareketler çekingen — taahhüt etmeden önce onay bekleyin.</div></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Trend Anlatısı</h3>
+  <p>Sinyalin altında, dashboard okunabilir 3 satırlık bir özet gösterir:</p>
+  <div style="display:grid;gap:6px;margin:12px 0">
+    <p><strong>Satır 1 — Ne:</strong> Mevcut trend durumu tek cümlede (ör. "Güçlü yükseliş trendi kuruldu.")</p>
+    <p><strong>Satır 2 — Neden:</strong> Arkasındaki yapısal detay (ör. "Tüm zaman dilimlerinde neredeyse tam uzlaşı.")</p>
+    <p><strong>Satır 3 — Ne kadar güçlü:</strong> Kanaat bağlamı (ör. "Hareketler güçlü ve kararlı — yüksek güven.")</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: VERİMLİLİK ═══ -->
+<section class="section" id="verimlilik" data-search="verimlilik mum hareket kalite dalgalı choppy normal verimli efficient şok rejim rank momentum hızlanıyor keskinleşiyor sabit zayıflıyor eşleşme surge onaylandı duraksıyor karşıt baskı gürültü">
+  <div class="section-label">Bölüm 3</div>
+  <h2 class="section-title">Mum Verimliliği</h2>
+  <p class="section-subtitle">Hareket Kalitesi — piyasa amaçlı mı hareket ediyor yoksa boşuna mı çabalıyor?</p>
+
+  <p>Verimlilik, bir mumun toplam enerjisinin ne kadarının <strong>net bir yönsel harekete</strong> dönüştüğünü ölçer. Bir mum çok aktif olabilir (geniş aralık) ama yönsel olarak hiçbir şey başaramayabilir (kapanış açılışa yakın, devasa fitiller). Verimlilik bu ayrımı yakalar.</p>
+
+  <div class="callout callout-info"><strong>Basit benzetme:</strong> Bir koşucu düşünün. Düz bir çizgide 100 metre koşmak = YÜKSEK verimlilik. 100 metre koşup zikzak yaparak başlangıç noktasından sadece 10 metre ilerde bitmek = DÜŞÜK verimlilik. Aynı enerji harcandı, çok farklı sonuç.</div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Verimlilik Yüzdesi</h3>
+  <p><strong>"▲ %73.2"</strong> gibi gösterilir. Ok (▲/▼) bileşik hareketin yönünü, yüzde ise mum grubunun toplam hareketinin ne kadarının yönsel yer değiştirmeye dönüştüğünü gösterir.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Rejim Etiketleri — Kalite Neye Benzer</h3>
+
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-cyan">Shock! (Şok)</span> <span style="font-size:13px;color:var(--text-muted)">≥ %100</span></div>
+    <div class="signal-desc">Olağanüstü bir olay. Mum, toplam aralığının mümkün gösterdiğinden <strong>daha fazla</strong> yönsel hareket etti. Son derece nadir — ani çöküş, sürpriz haber, devasa kırılım düşünün.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Bir merkez bankası acil faiz indirimi açıklıyor. Mum neredeyse hiç fitil olmadan tek bir yönde patlıyor. Bu bir şok olayı.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-green">Efficient (Verimli)</span> <span style="font-size:13px;color:var(--text-muted)">%50 — %100</span></div>
+    <div class="signal-desc">Temiz, amaçlı hareket. Mumun enerjisinin yarısından fazlası yönsel yer değiştirmeye gitti. <strong>Sağlıklı bir trend piyasası</strong> böyle görünür.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Sağlam gövdeli ve küçük fitilli bir mum. Açıldı, kararlı şekilde hareket etti ve ucuna yakın kapandı. Temiz trend davranışı.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-gold">Normal</span> <span style="font-size:13px;color:var(--text-muted)">%20 — %50</span></div>
+    <div class="signal-desc">Ortalama piyasa davranışı. Biraz yön, biraz gürültü. Her iki yönde de dikkat çekici değil. Çoğu zaman varsayılan durum budur.</div>
+    <div class="signal-example"><strong>Örnek:</strong> Sıradan bir günde sıradan bir mum. Biraz gövde, biraz fitil. Piyasa biraz hareket etti ama dramatik bir şey yok.</div>
+  </div>
+  <div class="signal-card">
+    <div class="signal-header"><span class="tag tag-red">Choppy (Dalgalı)</span> <span style="font-size:13px;color:var(--text-muted)">&lt; %20</span></div>
+    <div class="signal-desc"><strong>Faydalı yönsel hareket yok.</strong> Mumun aralığı vardı (yukarı aşağı hareket etti) ama neredeyse hiçbir şey başaramadı — kapanış açılışa çok yakın. Yerinde koşan biri gibi.</div>
+    <div class="signal-example"><strong>Örnek:</strong> İki tarafta uzun fitilleri olan bir doji mumu. Piyasa aktifti ama alıcılar ve satıcılar birbirini iptal etti. Yön yok. Buradan devam beklemeyin.</div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Uyarlanır Sıralama (Persentil)</h3>
+  <p>Ham yüzde tek başına bir hareketin olağandışı olup olmadığını söylemez. %80 verimlilik bir enstrüman için normal ama başka biri için aşırı olabilir. <strong>Uyarlanır Sıralama</strong>, mevcut verimliliği son 100 muma göre otomatik olarak karşılaştırarak bunu çözer:</p>
+  <div style="display:grid;gap:8px;margin:12px 0">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-cyan">Extreme (Aşırı)</span> <span style="font-size:13px;color:var(--text-muted)">Son geçmişin ilk %5'i</span></div><div class="signal-desc">Bu hareket son hareketlerin %95'inden daha güçlü. Olağandışı bir şey yaşanıyor.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-green">Strong (Güçlü)</span> <span style="font-size:13px;color:var(--text-muted)">İlk %25</span></div><div class="signal-desc">Ortalamanın üzerinde — yakın geçmiş standartlarıyla anlamlı bir hareket.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">Normal</span> <span style="font-size:13px;color:var(--text-muted)">Orta %50</span></div><div class="signal-desc">Bu enstrüman için ortalama. Dikkat çekici bir şey yok.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-grey">Weak (Zayıf)</span> <span style="font-size:13px;color:var(--text-muted)">Alt %25</span></div><div class="signal-desc">Son hareketlerin çoğundan daha zayıf. Piyasa durgun.</div></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Verimlilik Momentumu — Kalite Nereye Gidiyor</h3>
+  <p>Momentum, hareket kalitesinin <strong>yörüngesini</strong> söyler — iyileşiyor mu kötüleşiyor mu?</p>
+  <div style="display:grid;gap:8px;margin:12px 0">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-cyan">Accelerating (Hızlanıyor)</span></div><div class="signal-desc">Kalite yükseliyor. Son hareketler baz çizgiden çok daha güçlü. Trend <strong>güç kazanıyor</strong> — güçlü devam beklenir.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-green">Sharpening (Keskinleşiyor)</span></div><div class="signal-desc">Kalite kademeli olarak iyileşiyor. Sağlıklı bir işaret — piyasa zamanla daha yönsel hâle geliyor.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">Steady (Sabit)</span></div><div class="signal-desc">Kalitede önemli bir değişiklik yok. İstikrarlı — stres yok ama yeni enerji de yok.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-red">Fading (Zayıflıyor)</span></div><div class="signal-desc">Kalite düşüyor. Hareketler zayıflıyor. <strong>Tükenmeye dikkat edin</strong> — trend yakıtını tüketiyor olabilir.</div></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Trend Eşleşmesi — Verimlilik Yönle Buluşuyor</h3>
+  <p>Asıl güç, verimliliği aktif trendle birleştirmekten gelir. Yükseliş trendi sırasında yüksek verimlilikli bir düşüş mumu bir <strong>uyarıdır</strong>, yeşil ışık değil. İndikatör 19 eşleşmiş durum üretir:</p>
+
+  <h4 style="font-size:14px;font-weight:600;margin:20px 0 10px;color:var(--green)">Verimlilik trendi DESTEKLEDİĞİNDE (Hizalı):</h4>
+  <div style="display:grid;gap:6px;margin-bottom:16px">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-cyan">⚡ BULL/BEAR SURGE</span></div><div class="signal-desc">Trendi destekleyen aşırı verimlilik. Patlayıcı, yüksek kanaatli hareket.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-green">BULL/BEAR CONFIRMED</span></div><div class="signal-desc">Trendi destekleyen güçlü verimlilik. Sağlam, güvenilir devam.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">Bull/Bear Active</span></div><div class="signal-desc">Trend yönünde normal verimlilik. Standart trend davranışı.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-grey">Bull/Bear Stalling</span></div><div class="signal-desc">Eşleşen yöne rağmen zayıf verimlilik. Trend hız kaybediyor.</div></div>
+  </div>
+
+  <h4 style="font-size:14px;font-weight:600;margin:20px 0 10px;color:var(--red)">Verimlilik trende KARŞI olduğunda (Karşıt):</h4>
+  <div style="display:grid;gap:6px;margin-bottom:16px">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-red">⚠ STRONG COUNTER</span></div><div class="signal-desc">Trende karşı aşırı verimlilik. Ciddi tehlike — bu hareket trendi tehdit ediyor.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-red">Pressure (Baskı)</span></div><div class="signal-desc">Trende karşı güçlü itme. Bir uyarı atışı.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">Mild Resistance/Support</span></div><div class="signal-desc">Orta düzeyde karşı hareket. Muhtemelen trend içinde normal bir geri çekilme.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-grey">Noise (Gürültü)</span></div><div class="signal-desc">Trende karşı ihmal edilebilir hareket. Görmezden gelin.</div></div>
+  </div>
+
+  <h4 style="font-size:14px;font-weight:600;margin:20px 0 10px;color:var(--text-muted)">Aktif trend OLMADIĞINDA (Nötr):</h4>
+  <div style="display:grid;gap:6px">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-cyan">Extreme Move</span> <span class="tag tag-green">Strong Move</span> <span class="tag tag-gold">Normal</span> <span class="tag tag-grey">Indecisive</span></div><div class="signal-desc">Eşleştirilecek trend olmadığında, durum sadece ham kalite seviyesini yansıtır.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: HACİM ═══ -->
+<section class="section" id="hacim" data-search="hacim alış satış delta toplam geometri intrabar ayrıştırma senaryo onay karşı kırılım ölü piyasa emilim dağıtım teslimiyet tükenme sapma birikim">
+  <div class="section-label">Bölüm 4</div>
+  <h2 class="section-title">Hacim İstihbaratı</h2>
+  <p class="section-subtitle">Kim alıyor, kim satıyor ve arkasında ne kadar baskı var.</p>
+
+  <p>Hacim, fiyat hareketlerinin arkasındaki <strong>yoğunluğu</strong> söyler. Yüksek hacimle gelen bir fiyat artışı, düşük hacimliden daha anlamlıdır. Bu modül, toplam hacmi alış ve satış bileşenlerine ayırır, sonra sonucu sıralar ve sınıflandırır.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Hacim Ayrıştırma Yöntemleri</h3>
+  <div class="card-grid" style="margin-bottom:24px">
+    <div class="card"><div class="card-icon" style="background:var(--green-dim)">📐</div><h3>Geometri Yöntemi</h3><p><strong>Tüm planlarda</strong> kullanılabilir. Alış/satış ayrımını tahmin etmek için mumun şeklini kullanır. Kapanış zirveye yakınsa daha fazla hacim alışa atanır. Dibe yakınsa satışa.</p></div>
+    <div class="card"><div class="card-icon" style="background:var(--cyan-dim)">🔍</div><h3>Intrabar Yöntemi</h3><p><strong>Essential+</strong> plan gerektirir. Hacmi daha hassas sınıflandırmak için gerçek alt zaman dilimi verilerini kullanır. Ayarlarda tercih ettiğiniz alt zaman dilimini seçin (1 dakika önerilir).</p></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Temel Hacim Metrikleri</h3>
+  <div style="display:grid;gap:8px;margin-bottom:24px">
+    <div class="setting-item"><h4>Toplam Hacim (Total)</h4><p>Mumun tam hacmi — tüm alış ve satış birlikte.</p></div>
+    <div class="setting-item"><h4>Alış Hacmi (Buy)</h4><p>Alış baskısına atanan tahmini hacim miktarı.</p></div>
+    <div class="setting-item"><h4>Satış Hacmi (Sell)</h4><p>Satış baskısına atanan tahmini hacim miktarı.</p></div>
+    <div class="setting-item"><h4>Delta <span class="tag tag-green" style="font-size:10px">Alış − Satış</span></h4><p>Alış ve satış hacmi arasındaki fark. <strong>Pozitif delta</strong> = o mumda alıcılar baskın. <strong>Negatif delta</strong> = satıcılar baskın. En önemli tek hacim rakamı budur — kimin kazandığını söyler.</p></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Hacim Bölgeleri</h3>
+  <div style="display:grid;gap:8px;margin:12px 0 24px">
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-cyan">Patlayıcı Hacim</span></div><div class="signal-desc">Son geçmişin ilk %5'i. Önemli bir şey oluyor — kırılım, haber olayı veya büyük bir kayma. Dikkat edin.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-green">Yüksek Hacim</span></div><div class="signal-desc">Ortalamanın üzerinde. Gerçek piyasa ilgisi. Bu hacimle desteklenen hareketler genellikle daha güvenilirdir.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-gold">Orta Hacim</span></div><div class="signal-desc">Normal piyasa aktivitesi. Alışılmadık bir şey yok.</div></div>
+    <div class="signal-card"><div class="signal-header"><span class="tag tag-grey">Çok Düşük Hacim</span></div><div class="signal-desc">Piyasa sessiz. Düşük hacimli hareketler daha az güvenilirdir — kolayca tersine dönebilirler.</div></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">16 Hacim Senaryosunun Tamamı</h3>
+  <p>İndikatör, mevcut hacim durumunu 16 senaryodan birine sınıflandırır. Her biri fiyatın arkasında ne olduğunu farklı bir açıdan anlatır:</p>
+
+  <div class="scenario-grid">
+    <div class="scenario-item"><div class="scenario-id">⚡</div><div class="scenario-body"><h4>S1 — Tam Alış/Satış Onayı</h4><p>Aşırı hacim aktif trendi tamamen onaylıyor. En yüksek kanaatli hacim sinyali.</p><div class="scenario-example">Petrol yükseliş trendinde. Alış hacmi haftalardır en yüksek seviyeye ulaştı — bu hareketin arkasında gerçek para olduğunun tam onayı.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">✓</div><div class="scenario-body"><h4>S2 — Sağlıklı Alış/Satış Desteği</h4><p>Sağlam hacim, ortalamanın üzerinde katılımla trendi destekliyor. Stres sinyali yok.</p><div class="scenario-example">Tutarlı alış hacmiyle istikrarlı bir yükseliş trendi. Sağlıklı bir trend böyle görünür.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">◆</div><div class="scenario-body"><h4>S3 — Zayıf Alış/Satış Desteği</h4><p>Yön trendle eşleşiyor ama hacim ince. Güven vermek için yeterli kanaat yok.</p><div class="scenario-example">Fiyat yükseliyor ama hacim ortalamanın altında. Hareket doğru ama zayıf destekli — taze katılım olmadan durabilir.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">⚠</div><div class="scenario-body"><h4>S4 — Büyük Karşıtlık</h4><p>Aktif trende <strong>karşı</strong> iten aşırı hacim. Bu gürültü değil — ciddi bir şey oluyor.</p><div class="scenario-example">Piyasa yükseliş trendindeydi ama aniden aşırı satış hacimli bir mum belirdi. Karşıtlık güçlü — trend tehdit altında.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">⚠</div><div class="scenario-body"><h4>S5 — Baskı Artıyor</h4><p>Trende karşı belirgin hacim birikimi. Henüz aşırı değil ama net bir uyarı.</p><div class="scenario-example">Yükseliş trendi sırasında her yeni mum artan satış hacmi gösteriyor. Ayılar güç topluyor.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">◇</div><div class="scenario-body"><h4>S6 — Normal Düzeltme</h4><p>Zayıf hacimle küçük karşı hareket. Trend bunu kolayca absorbe etmeli.</p><div class="scenario-example">Yükseliş trendinde ortalamanın altında satışla küçük bir kırmızı mum. Normal bir geri çekilme — trend sağlıklı kalıyor.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">💥</div><div class="scenario-body"><h4>S7 — Kırılım Adayı</h4><p>Yerleşik trend olmadan aşırı tek taraflı hacim. Bir şeyler hareket etmek üzere.</p><div class="scenario-example">Piyasa düz seyrediyordu ama aniden devasa alış hacmi belirdi. Daha önce trend yoktu — bu hacim artışı yeni bir trendin başlangıcı olabilir.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">●</div><div class="scenario-body"><h4>S8 — Ölü Piyasa</h4><p>Her iki taraftan da minimum hacim. Kimse katılmıyor. Aktivitenin geri dönmesini bekleyin.</p><div class="scenario-example">Tatil günü işlemleri veya düşük likidite seansı. Hacim neredeyse sıfır. Buradaki fiyat hareketi güvenilir değil.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">🧲</div><div class="scenario-body"><h4>S9 — Adil Değer Mıknatısı</h4><p>Fiyat, birden fazla ölçekte hacmin yoğunlaştığı seviyeden uzaklaştı. O hacim merkezi mıknatıs gibi çalışır — fiyat geri dönme eğilimindedir.</p><div class="scenario-example">Birden fazla gruplama ölçeğinde hacim merkezi 85.50$ civarında ama fiyat 87.00$'da. Yeterince ölçek hemfikirse, o 85.50$ seviyesi fiyatı geri çekebilir.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">🛡</div><div class="scenario-body"><h4>S10 — Talep Emilimi</h4><p>Fiyat diplerinin yakınında yoğun alış tespit edildi. Alıcılar bir tabanı savunuyor — potansiyel birikim bölgesi.</p><div class="scenario-example">En yoğun alış hacmi fiyat aralığının altında yoğunlaşmış. Fiyat bu seviyeye her düştüğünde alıcılar devreye giriyor.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">📤</div><div class="scenario-body"><h4>S11 — Arz Dağılımı</h4><p>Fiyat zirvelerinin yakınında yoğun satış tespit edildi. Satıcılar tavanı kısıtlıyor — potansiyel dağıtım bölgesi.</p><div class="scenario-example">Fiyat aralığın üstüne her çıktığında yoğun satış beliriyor. Birisi bu seviyelerde dağıtım yapıyor (satıyor).</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">💢</div><div class="scenario-body"><h4>S12 — Satış Teslimiyeti</h4><p>Dip seviyelerde aşırı hacimle panik satışı. Bu genellikle potansiyel bir dip öncesindeki <strong>son yıkamayı</strong> işaret eder.</p><div class="scenario-example">Uzun bir düşüşün ardından hacim aşağı yönde patladı, panik seviyesinde satış. Genellikle son korkak satıcıların pes ettiği yer — potansiyel dönüş bölgesi.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">💢</div><div class="scenario-body"><h4>S13 — Alış Tükenmesi</h4><p>Zirve seviyelerde aşırı hacimle tükenme alışı. Bu genellikle potansiyel bir tepe öncesindeki <strong>son itişi</strong> işaret eder.</p><div class="scenario-example">Uzun bir rallinin ardından zirvelerde alış hacmi aşırı seviyelere fırladı. Son coşkulu alıcılar koşuyor — potansiyel bir zirve.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">⚠</div><div class="scenario-body"><h4>S14 — Hacim Sapması</h4><p>Trend devam ediyor ama hacim katılımı düşüyor. Yüzey düzgün görünse de temel zayıflıyor.</p><div class="scenario-example">Fiyat yeni zirveler yapmaya devam ediyor ama her yeni zirve daha az hacimle geliyor. Hareketi daha az katılımcı sürdürüyor — trendin incelmesi uyarısı.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">🔍</div><div class="scenario-body"><h4>S15 — Sessiz Birikim</h4><p>Minimum dikkatle diplere yakın küçük ama ısrarlı alış. Birisi sessizce pozisyon inşa ediyor.</p><div class="scenario-example">Hacim düşük ve piyasa sıkıcı görünüyor ama aralığın altında istikrarlı alış var. Akıllı para, bir hareket öncesi pozisyonlanıyor olabilir.</div></div></div>
+    <div class="scenario-item"><div class="scenario-id">🔍</div><div class="scenario-body"><h4>S16 — Sessiz Dağıtım</h4><p>Minimum dikkatle zirvelere yakın küçük ama ısrarlı satış. Birisi sessizce çıkıyor.</p><div class="scenario-example">Piyasa zirvelerde sakin ama istikrarlı bir satış akışı var. İçeridekiler sessizce pozisyonlarını boşaltıyor olabilir.</div></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: FOOTPRINT ═══ -->
+<section class="section" id="footprint" data-search="footprint poc kontrol noktası hacim fiyat seviyesi max alış satış min değer alanı native geometri gruplama ölçek">
+  <div class="section-label">Bölüm 5</div>
+  <h2 class="section-title">Hacim Footprint</h2>
+  <p class="section-subtitle">Sadece ne kadar hacim değil — NEREDE gerçekleştiğini de gösterir.</p>
+
+  <p>Normal hacim, bir mumda işlem gören toplam lot/kontrat sayısını söyler. <strong>Hacim Footprint</strong> daha derine iner: bir mum grubundaki <strong>her fiyat seviyesindeki</strong> hacmi gösterir. Alıcılar ve satıcılar arasındaki gerçek savaşların nerede yaşandığını ortaya koyar.</p>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">🎯</span> Kontrol Noktası (POC)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content">
+    <p><strong>Kontrol Noktası</strong>, bir gruplama dönemi içinde <strong>en çok toplam hacmin</strong> (alış + satış birlikte) işlem gördüğü tek fiyat seviyesidir. Bunu "adil değer" olarak düşünün — en çok katılımcının uzlaştığı fiyat.</p>
+    <p><strong>Örnek:</strong> 13 mumluk bir grupta, tüm hacmin her fiyat seviyesine dağıldığını hayal edin. 142.50$'da en çok hacim varsa, orası POC'dur. Size şunu söyler: "Bu fiyatta piyasa en çok uzlaşı buldu."</p>
+    <p><strong>Neden önemli:</strong> POC seviyeleri <strong>mıknatıs</strong> gibi davranır. Fiyat bir POC'dan uzaklaştığında, genellikle geri döner. Ne kadar çok gruplama ölçeği benzer bir POC fiyatında hemfikir olursa, o mıknatıs etkisi o kadar güçlüdür.</p>
+  </div></div></div>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📊</span> Max Alış / Max Satış Seviyeleri<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content">
+    <p><strong>Max Alış Fiyatı:</strong> En yoğun alış hacminin yoğunlaştığı fiyat seviyesi. Alıcıların en agresif olduğu yer.</p>
+    <p><strong>Max Satış Fiyatı:</strong> En yoğun satış hacminin yoğunlaştığı fiyat seviyesi. Satıcıların en agresif olduğu yer.</p>
+    <p><strong>Neden önemli:</strong> Max Alış aralığın diplerindeyse, alıcılar bir tabanı savunuyor (potansiyel destek). Max Satış zirvelerdeyse, satıcılar fiyatı kısıtlıyor (potansiyel direnç).</p>
+  </div></div></div>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📉</span> Min Alış / Min Satış Seviyeleri<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content">
+    <p><strong>En az</strong> alış veya satış hacminin olduğu fiyat seviyeleri. Zayıf bölgeler — fiyat buralarda fazla katılım olmadan hızla geçti.</p>
+    <p><strong>Neden önemli:</strong> Zayıf hacim bölgeleri daha az direnç sunar. Fiyat bu seviyelere tekrar gelirse, kolayca geçebilir — savunulmuyor.</p>
+  </div></div></div>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">🔗</span> POC Uzlaşısı (6 Ölçekten X'i Hemfikir)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content">
+    <p>İndikatör 6 gruplama ölçeğinin (3, 7, 13, 19, 29, 49 mum) her biri için bir POC hesaplar. Birden fazla ölçeğin POC'u aynı fiyata yakınsa, bu <strong>uzlaşı</strong> oluşturur.</p>
+    <p><strong>"6 Ölçeğin 4'ü Hemfikir"</strong> demek 4 farklı zaman ufkunun en yüksek hacimli fiyatlarını aynı seviyede bulduğu anlamına gelir. Bu, o fiyatın önemli olduğuna dair çok güçlü bir sinyal.</p>
+    <p><strong>Örnek:</strong> 7 mumluk POC 85.40$, 13 mumluk 85.55$, 19 mumluk 85.30$, 29 mumluk 85.45$. Dört ölçek 85.40$ civarında kümeleniyor — güçlü bir hacim merkezi.</p>
+  </div></div></div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Footprint Yöntemleri</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon" style="background:var(--green-dim)">📐</div><h3>Geometri (Tüm Planlar)</h3><p>Mumun şeklini kullanarak fiyat seviyeleri genelinde hacim dağılımını tahmin eder. Her yerde çalışır, özel plan gerekmez.</p></div>
+    <div class="card"><div class="card-icon" style="background:var(--cyan-dim)">🔬</div><h3>Native (Premium+)</h3><p>Her fiyat satırında gerçek alış/satış hacmi için TradingView'ın gerçek tick düzeyinde verisini kullanır. Maksimum hassasiyet. Premium veya Ultimate plan gerektirir.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: GRUPLAMA ═══ -->
+<section class="section" id="gruplama" data-search="gruplama mum lider kutu trend çizgi ölçek 3 7 13 19 29 49 yapı">
+  <div class="section-label">Bölüm 6</div>
+  <h2 class="section-title">Mum Gruplama & Lider Mumlar</h2>
+  <p class="section-subtitle">Piyasanın yapısını aynı anda birden fazla yakınlık seviyesinde görün.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Gruplama Kutuları Nedir?</h3>
+  <p>İndikatör, son 3, 7, 13, 19, 29 ve 49 mumun <strong>fiyat aralığını</strong> (en yüksek zirveden en düşük dibe) gösteren yarı saydam kutular çizer. Bu kutular Matruşka bebekleri gibi iç içe yerleşir — 3 mumluk kutu en küçük ve en içteki, 49 mumluk kutu en büyük ve en dıştaki.</p>
+  <div class="callout callout-info"><strong>Neden önemli:</strong> Her kutu farklı bir zaman ufkunu temsil eder. 3 mumluk kutu çok yakın geçmişteki harekettir. 49 mumluk kutu daha geniş yapısal aralıktır. Fiyat daha büyük bir kutunun kenarına yaklaştığında, önemli bir yapısal sınıra ulaşıyor demektir.</div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">6 Ölçek</h3>
+  <div class="card-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">3</h3><p>Mikro — anlık hareket</p></div>
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">7</h3><p>Kısa vadeli salınım</p></div>
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">13</h3><p>Orta-kısa köprü</p></div>
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">19</h3><p>Orta vadeli yapı</p></div>
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">29</h3><p>Uzun vadeli trend</p></div>
+    <div class="card" style="text-align:center"><h3 style="font-size:24px;color:var(--cyan)">49</h3><p>Makro yapı</p></div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Lider Mumlar</h3>
+  <p>Bir <strong>Lider Mum</strong>, gruplama dönemindeki tüm mumları tek bir bileşik OHLC muma birleştirir — grubun açılışını, zirvesini, dibini ve kapanışını gösteren tek bir özet mum. 7 gürültülü mum yerine, grubun gerçek yapısal karakterini gösteren tek bir net lider görürsünüz.</p>
+  <p>Lider mumlar etkinleştirildiğinde, normal grafik mumları gizlenir ve temiz bir yapısal görünüm elde edersiniz.</p>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Lider Trend Çizgileri</h3>
+  <p>Lider 6'nın (49 mumluk grup) <strong>zirvelerini</strong> ve <strong>diplerini</strong> Lider 3'e (13 mumluk grup) bağlayan ve geleceğe uzanan trend çizgileri. Bu çizgiler, geniş yapı ile orta vadeli yapı arasındaki ilişkiye dayalı olarak piyasanın yapısal eğimini gösterir.</p>
+  <p>Çizgiler çizildikten sonra kilitlenir ve yapılandırılabilir bir döngüde (varsayılan: her 7 mumda) yenilenir. Yenilemeler arasında çizgiler referans noktası olarak donmuş kalır.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: ALARMLAR ═══ -->
+<section class="section" id="alarmlar" data-search="alarm bildirim tetikleyici frekans mum kapanışı canlı artış trend kanaat verimlilik momentum hacim senaryo">
+  <div class="section-label">Bölüm 7</div>
+  <h2 class="section-title">Tüm Alarmlar</h2>
+  <p class="section-subtitle">5 kategoride 54 yapılandırılabilir alarm. Her piyasa durumu değişikliği size iletilir.</p>
+
+  <div class="callout callout-warn"><strong>Alarm frekansı:</strong> Tüm alarmları <strong>"Once Per Bar Close"</strong> (Mum Kapanışında Bir Kez) olarak ayarlayın — L1 (Canlı Hacim Artışı) hariç, o <strong>"Once Per Bar"</strong> (Her Mumda Bir Kez) olarak ayarlanmalıdır çünkü açık mumu izler.</div>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Trend Motoru Alarmları (T01–T11)</h3>
+  <p>Trend durumu <strong>değiştiğinde</strong> tetiklenir — her mumda değil, sadece geçişlerde.</p>
+  <table class="alert-table">
+    <thead><tr><th>Kod</th><th>Alarm Adı</th><th>Ne Anlama Gelir</th></tr></thead>
+    <tbody>
+      <tr><td><code>T01</code></td><td>⚡ Yükseliş Dönüşü Onaylandı</td><td>İki bağımsız katman, daha geniş düşüş yapısına karşı bir yükseliş dönüşü onayladı.</td></tr>
+      <tr><td><code>T02</code></td><td>⚡ Düşüş Dönüşü Onaylandı</td><td>İki katman, geniş yükseliş yapısına karşı düşüş dönüşü onayladı.</td></tr>
+      <tr><td><code>T03</code></td><td>▲ Yükseliş Dönüşü Oluşuyor</td><td>En hızlı ölçekler yükselişe döndü, en yavaşlar hâlâ düşüşte. Erken uyarı.</td></tr>
+      <tr><td><code>T04</code></td><td>▼ Düşüş Dönüşü Oluşuyor</td><td>En hızlı ölçekler düşüşe döndü, en yavaşlar hâlâ yükselişte. Erken uyarı.</td></tr>
+      <tr><td><code>T05</code></td><td>▲▲ Güçlü Yükseliş Trendi</td><td>6 ölçeğin 5+'i yükseliş yönünde hemfikir. Neredeyse tam yükseliş uzlaşısı.</td></tr>
+      <tr><td><code>T06</code></td><td>▼▼ Güçlü Düşüş Trendi</td><td>6 ölçeğin 5+'i düşüş yönünde hemfikir.</td></tr>
+      <tr><td><code>T07</code></td><td>▲ Gizli Yükseliş Eğilimi</td><td>Yapısal (en uzun) ölçekler ikisi de yükselişe döndü, kısa vadeli gürültü maskeleliyor.</td></tr>
+      <tr><td><code>T08</code></td><td>▼ Gizli Düşüş Eğilimi</td><td>Yapısal ölçekler ikisi de yüzeyin altında düşüşe döndü.</td></tr>
+      <tr><td><code>T09</code></td><td>▲ Yükseliş Trendi Aktif</td><td>Çoğunluk (3–4) ölçek yükseliş yönünde hemfikir.</td></tr>
+      <tr><td><code>T10</code></td><td>▼ Düşüş Trendi Aktif</td><td>Çoğunluk ölçek düşüş yönünde hemfikir.</td></tr>
+      <tr><td><code>T11</code></td><td>◆ Net Trend Yok</td><td>Yön kaybedildi — ölçekler uyuşmuyor. Dikkat.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Kanaat Alarmları (C1–C3)</h3>
+  <table class="alert-table">
+    <thead><tr><th>Kod</th><th>Alarm Adı</th><th>Ne Anlama Gelir</th></tr></thead>
+    <tbody>
+      <tr><td><code>C1</code></td><td>🔥 Kanaat → YÜKSEK</td><td>Birden fazla zaman ufkunda güçlü hareketler. Aktif sinyal ciddi güce sahip.</td></tr>
+      <tr><td><code>C2</code></td><td>Kanaat → ORTA</td><td>Normal hareket gücü. Standart enerji seviyesi.</td></tr>
+      <tr><td><code>C3</code></td><td>Kanaat → DÜŞÜK</td><td>Zayıf momentum. Sinyaller var ama hareketler çekingen.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Verimlilik Eşleşme Alarmları (E01–E19)</h3>
+  <p>Birleşik verimlilik + trend durumu değiştiğinde tetiklenir.</p>
+  <table class="alert-table">
+    <thead><tr><th>Kod</th><th>Durum</th><th>Ne Anlama Gelir</th></tr></thead>
+    <tbody>
+      <tr><td><code>E01</code></td><td>⚡ BULL SURGE</td><td>Yükseliş trendini destekleyen aşırı verimlilik — patlayıcı devam.</td></tr>
+      <tr><td><code>E02</code></td><td>⚡ BEAR SURGE</td><td>Düşüş trendini destekleyen aşırı verimlilik.</td></tr>
+      <tr><td><code>E03</code></td><td>BULL CONFIRMED</td><td>Yükseliş trendini destekleyen güçlü verimlilik.</td></tr>
+      <tr><td><code>E04</code></td><td>BEAR CONFIRMED</td><td>Düşüş trendini destekleyen güçlü verimlilik.</td></tr>
+      <tr><td><code>E05</code></td><td>Bull Active</td><td>Yükseliş yönünde normal verimlilik.</td></tr>
+      <tr><td><code>E06</code></td><td>Bear Active</td><td>Düşüş yönünde normal verimlilik.</td></tr>
+      <tr><td><code>E07</code></td><td>Bull Stalling</td><td>Yükseliş trendine rağmen zayıf verimlilik — hız kaybediyor.</td></tr>
+      <tr><td><code>E08</code></td><td>Bear Stalling</td><td>Düşüş trendine rağmen zayıf verimlilik.</td></tr>
+      <tr><td><code>E09</code></td><td>⚠ STRONG BEAR COUNTER</td><td>Yükseliş trendine karşı aşırı düşüş verimliliği. Tehlike.</td></tr>
+      <tr><td><code>E10</code></td><td>⚠ STRONG BULL COUNTER</td><td>Düşüş trendine karşı aşırı yükseliş verimliliği.</td></tr>
+      <tr><td><code>E11</code></td><td>Bear Pressure</td><td>Yükseliş trendine karşı güçlü düşüş itişi.</td></tr>
+      <tr><td><code>E12</code></td><td>Bull Pressure</td><td>Düşüş trendine karşı güçlü yükseliş itişi.</td></tr>
+      <tr><td><code>E13</code></td><td>Mild Resistance</td><td>Yükseliş trendi içinde orta düzey karşı hareket.</td></tr>
+      <tr><td><code>E14</code></td><td>Mild Support</td><td>Düşüş trendi içinde orta düzey karşı hareket.</td></tr>
+      <tr><td><code>E15</code></td><td>Noise</td><td>Trende karşı ihmal edilebilir hareket.</td></tr>
+      <tr><td><code>E16</code></td><td>Extreme Move</td><td>Trendsiz piyasada patlayıcı hareket.</td></tr>
+      <tr><td><code>E17</code></td><td>Strong Move</td><td>Yerleşik trend olmadan güçlü hareket.</td></tr>
+      <tr><td><code>E18</code></td><td>Normal</td><td>Net trend olmadan olağan aktivite.</td></tr>
+      <tr><td><code>E19</code></td><td>Indecisive</td><td>Düz, yönsüz piyasa.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Verimlilik Momentum Alarmları (M1–M4)</h3>
+  <table class="alert-table">
+    <thead><tr><th>Kod</th><th>Durum</th><th>Ne Anlama Gelir</th></tr></thead>
+    <tbody>
+      <tr><td><code>M1</code></td><td>📈 Verimlilik Hızlanıyor</td><td>Hareket kalitesi yükseliyor. Trend hızla güç kazanıyor.</td></tr>
+      <tr><td><code>M2</code></td><td>Verimlilik Keskinleşiyor</td><td>Hareket kalitesi kademeli iyileşme. Sağlıklı gelişim.</td></tr>
+      <tr><td><code>M3</code></td><td>Verimlilik Sabit</td><td>Önemli kalite değişikliği yok. İstikrarlı.</td></tr>
+      <tr><td><code>M4</code></td><td>📉 Verimlilik Zayıflıyor</td><td>Hareket kalitesi kötüleşiyor. Trend tükenmesine dikkat edin.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Hacim Senaryo Alarmları (V01–V16)</h3>
+  <table class="alert-table">
+    <thead><tr><th>Kod</th><th>Senaryo</th><th>Ne Anlama Gelir</th></tr></thead>
+    <tbody>
+      <tr><td><code>V01</code></td><td>⚡ Tam Alış Onayı</td><td>Aşırı hacim yükseliş trendini onaylıyor.</td></tr>
+      <tr><td><code>V02</code></td><td>⚡ Tam Satış Onayı</td><td>Aşırı hacim düşüş trendini onaylıyor.</td></tr>
+      <tr><td><code>V03</code></td><td>✓ Sağlıklı Alış Desteği</td><td>Sağlam hacim yükseliş trendini destekliyor.</td></tr>
+      <tr><td><code>V04</code></td><td>✓ Sağlıklı Satış Desteği</td><td>Sağlam hacim düşüş trendini destekliyor.</td></tr>
+      <tr><td><code>V05</code></td><td>◆ Zayıf Alış Desteği</td><td>Alış yükseliş trendini destekliyor ama hacim ince.</td></tr>
+      <tr><td><code>V06</code></td><td>◆ Zayıf Satış Desteği</td><td>Satış düşüş trendini destekliyor ama hacim ince.</td></tr>
+      <tr><td><code>V07</code></td><td>⚠ Güçlü Satış Karşıtlığı</td><td>Yükseliş trendine karşı aşırı satış.</td></tr>
+      <tr><td><code>V08</code></td><td>⚠ Güçlü Alış Karşıtlığı</td><td>Düşüş trendine karşı aşırı alış.</td></tr>
+      <tr><td><code>V09</code></td><td>⚠ Satış Baskısı Artıyor</td><td>Yükseliş trendine karşı belirgin satış.</td></tr>
+      <tr><td><code>V10</code></td><td>⚠ Alış Baskısı Artıyor</td><td>Düşüş trendine karşı belirgin alış.</td></tr>
+      <tr><td><code>V11</code></td><td>◇ Normal Düzeltme</td><td>Küçük karşı hareket. Gürültü.</td></tr>
+      <tr><td><code>V12</code></td><td>💥 Kırılım Adayı</td><td>Aşırı tek taraflı hacim, henüz trend yok.</td></tr>
+      <tr><td><code>V13</code></td><td>● Ölü Piyasa</td><td>Her iki taraftan da anlamlı hacim yok.</td></tr>
+      <tr><td><code>V14</code></td><td>⚠ Hacim Sapması</td><td>Trend devam ediyor ama hacim düşüyor.</td></tr>
+      <tr><td><code>V15</code></td><td>🔍 Sessiz Birikim</td><td>Diplere yakın sessiz alış — olası pozisyonlama.</td></tr>
+      <tr><td><code>V16</code></td><td>🔍 Sessiz Dağıtım</td><td>Zirvelere yakın sessiz satış — olası çıkış.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px">Canlı Hacim Artışı (L1)</h3>
+  <div class="signal-card" style="border-color:var(--red)">
+    <div class="signal-header"><span class="tag tag-red">🔴 CANLI: Hacim Artışı</span></div>
+    <div class="signal-desc">
+      <p>Bu, <strong>mevcut açık mumu izleyen tek alarm</strong>dır. Canlı mumun hacmi önceki mumun 2 katını aştığında VE son 49 mumun ilk %5'inde yer aldığında tetiklenir.</p>
+      <p style="margin-top:8px"><strong>Önemli:</strong> Bu alarmın frekansını <strong>"Once Per Bar"</strong> (Her Mumda Bir Kez) olarak ayarlayın ("Once Per Bar Close" değil) çünkü gerçek zamanlı veriyi izler. Mum açıkken değerler dalgalanabilir — mum kapandığında her şey kalıcı olarak kilitlenir.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: AYARLAR ═══ -->
+<section class="section" id="ayarlar" data-search="ayarlar giriş seçenek yapılandırma yazı boyutu pozisyon mobil seviye dil renk saydamlık lider mum kutu trend çizgi yenileme uzatma stil genişlik hacim yöntem intrabar zaman dilimi footprint tick değer alanı">
+  <div class="section-label">Bölüm 8</div>
+  <h2 class="section-title">Ayarlar Referansı</h2>
+  <p class="section-subtitle">Her giriş seçeneği açıklandı — her ayarın ne yaptığını tam olarak bilin.</p>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Erişim Seviyesi</h3>
+  <div class="setting-item"><h4>Subscription Plan <span class="setting-default">Varsayılan: Basic (Free)</span></h4><p>İlgili özellikleri açmak için TradingView planınızı seçin. Seçenekler: Basic (Free), Essential and Plus, Premium and Ultimate. Her üst seviye alttaki tüm özellikleri içerir.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Dashboard</h3>
+  <div class="setting-item"><h4>Font Size <span class="setting-default">Varsayılan: 12</span></h4><p>Dashboard panelinin yazı boyutu. Aralık: 6–50. Düşük = kompakt, yüksek = daha belirgin.</p></div>
+  <div class="setting-item"><h4>Position <span class="setting-default">Varsayılan: Top Right</span></h4><p>Dashboard'un grafikte nerede görüneceği. 9 pozisyon mevcut.</p></div>
+  <div class="setting-item"><h4>Mobile Dashboard <span class="setting-default">Varsayılan: Kapalı</span></h4><p>Tam masaüstü paneli, sadece en kritik verileri gösteren ince 5 satırlık mobil versiyonla değiştirir.</p></div>
+  <div class="setting-item"><h4>Mobile Font Size <span class="setting-default">Varsayılan: 6</span></h4><p>Mobil dashboard için yazı boyutu. Telefonda ekran alanını maksimize etmek için varsayılan 6 en küçük değerdir.</p></div>
+  <div class="setting-item"><h4>Dashboard Language <span class="setting-default">Varsayılan: English</span></h4><p>Tüm dashboard metin, etiket ve anlatıları için görüntüleme dili. English, Türkçe, العربية. Giriş ayarları ve alarm mesajları İngilizce kalır.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Mum Gruplama</h3>
+  <div class="setting-item"><h4>Box Color <span class="setting-default">Varsayılan: Mor (#9d4e9d)</span></h4><p>Tüm gruplama kutuları için renk.</p></div>
+  <div class="setting-item"><h4>Box Transparency <span class="setting-default">Varsayılan: 90</span></h4><p>Gruplama kutularının saydamlığı. 0 = tamamen opak, 100 = görünmez.</p></div>
+  <div class="setting-item"><h4>Show Leader Candles <span class="setting-default">Varsayılan: Açık</span></h4><p>Her gruplama döneminin merkezinde bileşik lider mumları gösterir. Aktifken normal grafik mumları gizlenir.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Lider Trend Çizgileri</h3>
+  <div class="setting-item"><h4>Show Leader Trend Lines <span class="setting-default">Varsayılan: Açık</span></h4><p>Geniş ölçek ve orta ölçek lider mum zirve/diplerini bağlayan yapısal trend çizgileri.</p></div>
+  <div class="setting-item"><h4>Refresh Cycle (bars) <span class="setting-default">Varsayılan: 7</span></h4><p>Trend çizgisi yeniden hesaplamaları arasındaki onaylanmış mum sayısı. Arada çizgiler donmuş kalır.</p></div>
+  <div class="setting-item"><h4>Forward Extension (bars) <span class="setting-default">Varsayılan: 14</span></h4><p>Trend çizgilerinin ankraj noktasından ileriye kaç mum uzatılacağı.</p></div>
+  <div class="setting-item"><h4>High Line Color <span class="setting-default">Varsayılan: Yeşil (#06d6a0)</span></h4><p>Üst trend çizgisi (zirveleri bağlayan) rengi.</p></div>
+  <div class="setting-item"><h4>Low Line Color <span class="setting-default">Varsayılan: Kırmızı (#ef476f)</span></h4><p>Alt trend çizgisi (dipleri bağlayan) rengi.</p></div>
+  <div class="setting-item"><h4>Line Style <span class="setting-default">Varsayılan: Solid</span></h4><p>Görsel stil: Solid, Dashed veya Dotted.</p></div>
+  <div class="setting-item"><h4>Line Width <span class="setting-default">Varsayılan: 2</span></h4><p>Trend çizgilerinin kalınlığı. Aralık: 1–5.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Trend Motoru</h3>
+  <div class="setting-item"><h4>Show Trend Engine Row <span class="setting-default">Varsayılan: Açık</span></h4><p>Dashboard'da trend motoru bölümünü açıp kapatır. Motor her zaman dahili olarak çalışır — bu sadece görünümü kontrol eder.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Mum Verimliliği</h3>
+  <div class="setting-item"><h4>Show Efficiency Row <span class="setting-default">Varsayılan: Açık</span></h4><p>Dashboard'da hareket kalitesi bölümünü açıp kapatır.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Hacim Ayrıştırma</h3>
+  <div class="setting-item"><h4>Show Volume Row <span class="setting-default">Varsayılan: Açık</span></h4><p>Dashboard'da hacim ayrıştırma bölümünü açıp kapatır.</p></div>
+  <div class="setting-item"><h4>Volume Method <span class="setting-default">Varsayılan: Geometry</span></h4><p>Hacmin alış/satışa nasıl bölüneceği. Geometry tüm planlarda çalışır. Intrabar alt zaman dilimi verisi kullanır — Essential+ gerektirir.</p></div>
+  <div class="setting-item"><h4>Intrabar Timeframe <span class="setting-default">Varsayılan: 1 (dakika)</span></h4><p>Intrabar hacim sınıflandırması için kullanılan zaman dilimi. 1 dakika önerilir. Sadece Intrabar yöntemi seçildiğinde kullanılır.</p></div>
+
+  <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px">Hacim Footprint</h3>
+  <div class="setting-item"><h4>Footprint Method <span class="setting-default">Varsayılan: Geometry</span></h4><p>Hacmin fiyat seviyeleri genelinde nasıl dağıtılacağı. Geometry tüm planlarda çalışır. Native gerçek tick düzeyinde veri kullanır — Premium+ gerektirir.</p></div>
+  <div class="setting-item"><h4>Ticks Per Row (Sadece Native) <span class="setting-default">Varsayılan: 1</span></h4><p>Native footprint'in fiyat hassasiyeti. Her satır bu kadar tick kapsar. Düşük = daha ince detay.</p></div>
+  <div class="setting-item"><h4>Value Area % (Sadece Native) <span class="setting-default">Varsayılan: 70</span></h4><p>Değer Alanı hesaplaması için kullanılan toplam hacmin yüzdesi. Standart %70'tir.</p></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: SÖZLÜK ═══ -->
+<section class="section" id="sozluk" data-search="sözlük terim tanım kelime anlam açıklama">
+  <div class="section-label">Bölüm 9</div>
+  <h2 class="section-title">Sözlük</h2>
+  <p class="section-subtitle">Bu indikatörde kullanılan her terim, sade dille tanımlandı.</p>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Hizalama Skoru (Alignment)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>6 analiz ölçeğinin kaçının yön konusunda hemfikir olduğunu gösteren −6 ile +6 arası bir sayı. +6 = hepsi yükseliş, −6 = hepsi düşüş, 0 = tam uyumsuzluk.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Kaskad (Dönüş Onaylandı)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>En güçlü dönüş sinyali. Kısa vadeli VE orta vadeli ölçekler bağımsız olarak uzun vadeli yöne karşı döndüğünde tetiklenir. İki ayrı katmandan dönüş onayı.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Choppy (Dalgalı)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Fiyatın herhangi bir yönde ilerleme kaydetmeden ileri geri hareket ettiği piyasa koşulu. %20'nin altında verimlilik. Koşu bandında koşmak gibi — çok hareket, sıfır yer değiştirme. Dalgalı koşullarda işlem yapmak risklidir çünkü yönsel avantaj yoktur.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Kanaat (Conviction)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Bir sinyalin arkasındaki hareketlerin ne kadar güçlü olduğu — sadece yön değil, güç. YÜKSEK kanaat, birden fazla zaman ufkunda hareketlerin büyük ve kararlı olduğu anlamına gelir. DÜŞÜK kanaat, yön doğru olabilir ama enerji zayıf demektir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Delta (Hacim)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Alış Hacmi eksi Satış Hacmi. Pozitif delta, o mumda alıcıların satıcılardan daha fazla hacim koyduğu anlamına gelir. Negatif delta, satıcıların baskın olduğu anlamına gelir. Her mumda kimin kazandığının en basit ölçüsü.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Sapma / Divergence (Dönüş Oluşuyor)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Erken uyarı dönüş sinyali. En hızlı ölçekler (3 ve 7 mumluk) bir yöne dönerken en yavaşlar (29 ve 49 mumluk) hâlâ diğer yönü gösteriyor. Yapı içten çatırdamaya başlıyor — ama henüz onaylanmadı.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Verimlilik (Efficiency)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Bir mum grubunun toplam hareketinin yönsel yer değiştirmeye dönüşen yüzdesi. %100 = her hareket tek yöne gitti (saf trend). %0 = piyasa çok hareket etti ama başladığı yerde bitti (saf gürültü). Hareket kalitesinin temel ölçüsü.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Footprint<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Hacmi sadece toplam bir rakam olarak değil, bir dönem içindeki her fiyat seviyesine dağıtılmış olarak görmenin yolu. Hacmin NEREDE gerçekleştiğini gösterir, sadece ne kadar olduğunu değil. Belirli fiyatlarda destek, direnç ve adil değeri ortaya koyar.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Gruplama Ölçeği<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>İndikatör aynı anda 6 farklı zaman ufkunu analiz eder: 3, 7, 13, 19, 29 ve 49 mum. Her biri "ölçek" veya "gruplama dönemi" olarak adlandırılır. Küçük ölçekler hızlı tepki verir (gürültülü), büyük ölçekler yavaş tepki verir (yumuşak, yapısal).</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Gizli Eğilim (Hidden Bias)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>En büyük yapısal ölçekler (29 ve 49 mumluk) bir yönde hemfkirken, kısa vadeli gürültünün genel hizalamayı nötr gösterdiği durum. Yapısal eğilim gerçek ama yüzeysel analizden gizli.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Lider Mum<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Gruplama dönemindeki tüm mumları tek bir OHLC bileşik muma birleştiren özet mum. Birçok küçük mumu, grubun gerçek yapısal karakterini gösteren tek bir net liderle değiştirerek grafiği sadeleştirir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Kontrol Noktası / POC<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Bir gruplama dönemi içinde en çok toplam hacmin işlem gördüğü tek fiyat seviyesi. "Adil değer" — en çok katılımcının uzlaştığı fiyat. POC seviyeleri mıknatıs gibi davranır: fiyat onlara geri dönme eğilimindedir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Repaint (Yeniden Boyama)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Bir indikatörün zaten gösterildikten sonra geçmiş değerlerini değiştirmesi. Repaint yapan bir indikatör, o mum canlıyken aslında orada olmayan bir "Al" sinyali gösterebilir. <strong>Bu indikatör repaint YAPMAZ.</strong> Tüm sinyaller mum kapanışında kilitlenir ve asla değişmez. Tek istisna, tasarım gereği açık mumu izleyen Canlı Hacim Artışı alarmıdır (L1) — onun değerleri de mum kapandığında kilitlenir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Trend Eşleşmesi (Coupling)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Verimliliği (hareket kalitesi) aktif trend yönüyle birleştirme işlemi. Trend yönünde güçlü hareket = "onaylandı". Trende karşı güçlü hareket = "karşı baskı". Bu, ham verimliliğin tek başına sağlayamadığı bağlamı verir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">📘</span>Değer Alanı (Value Area)<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Toplam hacmin belirli bir yüzdesini (varsayılan %70) içeren fiyat aralığı. Tüm hacmin %70'i 84.00$ ile 86.00$ arasında işlem gördüyse, bu aralık Değer Alanıdır. Fiyat Değer Alanı içinde kalma veya geri dönme eğilimindedir. Sadece Native footprint yöntemiyle kullanılabilir.</p></div></div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BÖLÜM: SSS ═══ -->
+<section class="section" id="sss" data-search="sss soru cevap repaint piyasa zaman dilimi boş geometri intrabar native yardım sorun giderme">
+  <div class="section-label">Bölüm 10</div>
+  <h2 class="section-title">SSS & Sorun Giderme</h2>
+  <p class="section-subtitle">Sık sorulan sorular ve çözümler.</p>
+
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Bu indikatör repaint yapıyor mu?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p><strong>Hayır.</strong> Tüm hesaplamalar ve sinyaller son kapanan muma sabitlenmiştir. Bir mum kapandığında hiçbir şey değişmez — renkler, etiketler, değerler, her şey kalıcı olarak kilitlenir. Tek istisna, tasarım gereği mevcut açık mumu izleyen <strong>Canlı Hacim Artışı alarmıdır (L1)</strong>. Bu değer bile mum kapandığı anda kilitlenir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Hangi piyasalarda çalışır?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>TradingView'da mevcut olan herhangi bir enstrüman — hisse senetleri, forex, kripto, emtialar, endeksler, vadeli işlemler. İndikatör her enstrümanın özelliklerine otomatik olarak ayarlanır.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Hangi zaman dilimini kullanmalıyım?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>İndikatör <strong>tasarımı gereği çoklu zaman dilimlidir</strong> — herhangi bir zaman diliminde çalışır. Grafik zaman diliminiz ne olursa olsun dahili olarak 6 farklı ölçeği analiz eder. İşlem stilinize uyan zaman dilimini kullanın.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Bazı dashboard hücrelerinde neden "—" görüyorum?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>Bu, henüz yeterli mum geçmişi olmadığı anlamına gelir. 49 mumluk ölçek, bir değer üretmek için en az 49 kapanmış muma ihtiyaç duyar. Daha fazla mum yüklendikçe değerler dolar. Yeni yüklenen grafiklerde normaldir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Geometry vs Intrabar — hangi hacim yöntemini kullanmalıyım?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p><strong>Geometry</strong> varsayılandır ve tüm planlarda çalışır. Sağlam bir tahmin sağlar. <strong>Intrabar</strong> daha hassastır ama Essential veya üstü TradingView planı gerektirir ve alt zaman dilimi verisi kullanır. Planınız destekliyorsa ve daha yüksek doğruluk istiyorsanız Intrabar kullanın. Aksi halde Geometry gayet yeterlidir.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Geometry vs Native footprint — hangisini kullanmalıyım?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p><strong>Geometry</strong> hacim dağılımını tahmin eder ve tüm planlarda çalışır. <strong>Native</strong> maksimum hassasiyet için gerçek tick düzeyinde veri kullanır ama Premium veya Ultimate TradingView planı gerektirir. Erişiminiz varsa, Native en doğru footprint verisini sunar.</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Alarmları nasıl düzgün kurarım?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p>1. TradingView'da alarm zilini tıklayın. 2. İndikatörü seçin. 3. İstediğiniz koşulu seçin (ör. "T01 ⚡ Bullish Reversal Confirmed"). 4. Frekansı L1 hariç tüm alarmlar için <strong>"Once Per Bar Close"</strong> olarak ayarlayın. 5. L1 (Canlı Hacim Artışı) için frekansı <strong>"Once Per Bar"</strong> olarak ayarlayın. 6. Bildirim yönteminizi yapılandırın (popup, e-posta, webhook, vb.).</p></div></div></div>
+  <div class="accordion"><button class="accordion-trigger" onclick="toggleAcc(this)" aria-expanded="false"><span class="acc-icon">❓</span>Bu bir sinyal botu mu?<span class="acc-arrow">▼</span></button><div class="accordion-body"><div class="accordion-content"><p><strong>Hayır.</strong> Bu bir yapısal analiz aracıdır. Size trend, verimlilik ve hacmin mevcut durumunu gösterir — ama işlem kararı her zaman sizindir. Size bilgiyi verir; onunla ne yapacağınıza siz karar verirsiniz.</p></div></div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ HAKKINDA ═══ -->
+<section class="section" id="hakkinda" data-search="hakkında ata sabancı profil iletişim tradingview twitter X">
+  <div class="section-label">Hakkında</div>
+  <h2 class="section-title">Ata Sabancı</h2>
+  <p class="section-subtitle">Uluslararası ilişkiler ve piyasa yapısı analisti.</p>
+  <p><em>"Hacim Dinamikleri ve Veriye Dayalı Mantık ile gizli piyasa derinliğini ortaya çıkarmak."</em></p>
+  <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+    <a href="https://www.tradingview.com/u/ata_sabanci/#published-scripts" target="_blank" rel="noopener" class="btn-tv">TradingView Profili</a>
+    <a href="https://www.tradingview.com/script/EDyXsADY-Smart-Trader-SNIF-OFF-5-1-Trade-Finder-By-Ata-Sabanci/" target="_blank" rel="noopener" class="btn-outline">İndikatörü Edin</a>
+    <a href="https://x.com/sabanci_ata" target="_blank" rel="noopener" class="btn-outline">𝕏 @sabanci_ata</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://www.tradingview.com/u/ata_sabanci/#published-scripts" target="_blank" rel="noopener">TradingView Profili</a>
+    <a href="https://www.tradingview.com/script/EDyXsADY-Smart-Trader-SNIF-OFF-5-1-Trade-Finder-By-Ata-Sabanci/" target="_blank" rel="noopener">İndikatör Sayfası</a>
+    <a href="https://x.com/sabanci_ata" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <p>Smart Trader — SNIF-OFF 5.1, Trade Finder · Ata Sabancı</p>
+  <p style="margin-top:8px;font-size:11px;color:var(--text-muted)">Bu indikatör eğitim ve analiz amaçlıdır. Yatırım tavsiyesi değildir. Tüm işlemler risk içerir. Her zaman kendi araştırmanızı yapın.</p>
+</footer>
+
+</div>
+</main>
+
+<script>
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('show')}
+function toggleAcc(btn){const body=btn.nextElementSibling;const expanded=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',!expanded);if(!expanded){body.classList.add('open')}else{body.classList.remove('open')}}
+const navLinks=document.querySelectorAll('.nav-link');
+const sections=document.querySelectorAll('.section, .hero');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+id)})}})},{rootMargin:'-80px 0px -60% 0px',threshold:0});
+sections.forEach(s=>{if(s.id)observer.observe(s)});
+function filterSections(query){const q=query.toLowerCase().trim();const allSections=document.querySelectorAll('.section');const dividers=document.querySelectorAll('.divider');if(!q){allSections.forEach(s=>s.classList.remove('hidden'));dividers.forEach(d=>d.style.display='');return}allSections.forEach(s=>{const searchData=(s.getAttribute('data-search')||'')+' '+s.textContent.toLowerCase();s.classList.toggle('hidden',!searchData.includes(q))});dividers.forEach(d=>{const next=d.nextElementSibling;if(next&&next.classList.contains('hidden')){d.style.display='none'}else{d.style.display=''}})}
+navLinks.forEach(l=>{l.addEventListener('click',()=>{if(window.innerWidth<=900){toggleSidebar()}})});
+</script>
+</body>
+</html>
